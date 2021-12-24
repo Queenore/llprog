@@ -1,0 +1,19 @@
+OBJS= gorn.c
+
+AR = riscv64-unknown-elf-ar.exe
+CC = riscv64-unknown-elf-gcc.exe
+
+MYLIB = lib.a
+
+CFLAGS= -O1
+
+vpath %.h .
+vpath %.c .
+
+%.o: %.c
+	$(CC) -MD $(CFLAGS) -c $< -o $@
+
+all: $(MYLIB)
+
+$(MYLIB): gorn.o
+	$(AR) -rsc $@ $^
